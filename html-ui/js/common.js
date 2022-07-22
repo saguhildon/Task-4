@@ -1,9 +1,12 @@
 /* 
  Common URLs so that it's easy to update
 */
-var customer_login_url = 'http://localhost:32144/customers/login/'
+var customer_login_url = 'http://localhost/customers/login/'
 
-var customer_url = 'http://localhost:32144/customers/customer/'
+var customer_url = 'http://localhost/customers/customer/'
+
+// var task_url = 'http://localhost:5000/api/TaskModels'  //local
+var task_url = 'http://localhost/v1/task/TaskModels'  //kube
 
 /*
 common Signout
@@ -39,6 +42,35 @@ function signIn(e)
     			}, 1000);
     })
     .catch(error => { alert("Invalid Credentials!"); console.error(error);});
+	return false;
+}
+function Submit(e)
+{
+	e.preventDefault();
+	 
+	
+	var TaskDescription = document.getElementById('TaskDescription').value;
+	var TaskPriority = document.getElementById('TaskPriority').value;
+	var TaskStatus = document.getElementById('TaskStatus').value;
+	var CustomerID = document.getElementById('CustomerID').value;
+
+	var data = {};
+	data.TaskDescription = TaskDescription;
+	data.TaskPriority = TaskPriority;
+	data.TaskStatus = TaskStatus;
+	data.CustomerID = CustomerID;
+	
+	
+	console.log('form submitted' , data);
+	
+	axios.post(task_url, data)
+    .then(response => {
+    	 console.log(`Task added`, response.data);  	 
+    	alert('Task Added successfully!!')
+		
+		document.getElementById("output").innerHTML = JSON.stringify(response.data);
+    })
+    .catch(error => { alert("Invalid !"); console.error(error);});
 	return false;
 }
 
