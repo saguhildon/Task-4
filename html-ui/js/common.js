@@ -6,7 +6,7 @@ var customer_login_url = 'http://localhost/customers/login/'
 var customer_url = 'http://localhost/customers/customer/'
 
 // var task_url = 'http://localhost:5000/api/TaskModels'  //local
-var task_url = 'http://localhost/v1/task/TaskModels'  //kube
+var task_url = 'http://localhost/v1/task/api/TaskModels'  //kube
 
 /*
 common Signout
